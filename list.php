@@ -68,9 +68,9 @@ $date_out = isset($_POST['date_out']) ? $_POST['date_out'] : date('Y-m-d', strto
 								<!-- <h3><b>$<?php echo number_format($cat_arr[$row['room_type_id']]['price'], 2); ?></b><span> / per day</span></h3> -->
 								<h3>
 									<br>
-									&#8358;
+									<!-- &#8358; -->
 									<span class="currency">
-									<?php echo number_format($cat_arr[$row['room_type_id']]['price'], 2); ?>
+									<?php echo $cat_arr[$row['room_type_id']]['price']; ?>
 									</span>
 									<span>
 										/ per day
@@ -78,7 +78,7 @@ $date_out = isset($_POST['date_out']) ? $_POST['date_out'] : date('Y-m-d', strto
 								</h3>
 								<h4><b><?php echo $cat_arr[$row['room_type_id']]['room_type']; ?></b></h4>
 								<div class="align-self-end mt-5">
-									<button class="btn btn-primary float-right book_now" type="button" data-id="<?php echo $row['room_type_id']; ?>">Book now</button>
+									<button class="btn btn-primary float-right book_now" type="button" room-type-id="<?php echo $row['room_type_id']; ?>" >Book now</button>
 								</div>
 							</div>
 						</div>
@@ -97,6 +97,7 @@ $date_out = isset($_POST['date_out']) ? $_POST['date_out'] : date('Y-m-d', strto
 
 <script>
 	$('.book_now').click(function() {
-		uni_modal('Book', 'admin/book.php?in=<?php echo $date_in; ?>&out=<?php echo $date_out; ?>&cid=' + $(this).attr('data-id'));
+		// uni_modal('Book', 'admin/book.php?in=<?php echo $date_in; ?>&out=<?php echo $date_out; ?>&cid=' + $(this).attr('data-id'));
+		uni_modal('Book', `book.php?room_id=${$(this).attr('room-id')}&room_type_id=${$(this).attr('room-type-id')}`);
 	});
 </script>
